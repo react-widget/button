@@ -20,5 +20,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "babel-eslint": "^8.2.5"
+  }
 }
