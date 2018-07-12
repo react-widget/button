@@ -13,16 +13,12 @@
   },
   "author": "nobo<nobo.zhou@foxmail.com>",
   "license": "MIT",
-  "devDependencies": {
-    "babel-plugin-transform-remove-strict-mode": "0.0.2",
-    "babel-preset-env": "^1.7.0",
-    "nil-build": "^1.1.6"
-  },
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.6",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1"
-  }
+  },
+  "devDependencies": {}
 }
