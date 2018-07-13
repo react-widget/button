@@ -1,7 +1,7 @@
-$height: 28px;
-$smallHeight: 22px;
-$largeHeight: 32px;
-$borderRadius: 3px;//3px
+$height: 28px !default;
+$smallHeight: 22px !default;
+$largeHeight: 32px !default;
+$borderRadius: 3px !default;
 
 //按钮默认样式风格
 $defaultBorderColor: #c4c4c4;
@@ -24,14 +24,14 @@ $typeList: primary,danger;
 
 $typeMap: (
 	primaryColor: #FFF,
-	primaryBGColor: #108ee9,
-	primaryBorderColor: #108ee9,
+	primaryBGColor: #2d8cf0,
+	primaryBorderColor: #2d8cf0,
 	primaryHoverColor: #FFF,
-	primaryHoverBGColor: #49a9ee,
-	primaryHoverBorderColor: #49a9ee,
+	primaryHoverBGColor: mix(#FFF,#2d8cf0, 20%),
+	primaryHoverBorderColor: mix(#FFF,#2d8cf0, 20%),
 	primaryActiveColor: #FFF,
-	primaryActiveBGColor: #0e77ca,
-	primaryActiveBorderColor: #0e77ca,
+	primaryActiveBGColor: mix(#000,#2d8cf0, 10%),
+	primaryActiveBorderColor: mix(#000,#2d8cf0, 10%),
 	
 	dangerColor: #FFF,
 	dangerBGColor: #f04134,
