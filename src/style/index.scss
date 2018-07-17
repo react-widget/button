@@ -4,44 +4,94 @@ $largeHeight: 32px !default;
 $borderRadius: 3px !default;
 
 //按钮默认样式风格
-$defaultBorderColor: #c4c4c4;//#ccc  #B0B0B0
-$defaultColor: #1f2d3d;
-$defaultBGColor: #FFF;
+$defaultBorderColor: #dddee1;//#ccc  #B0B0B0
+$defaultColor: #495060;
+$defaultBGColor: #f7f7f7;
 
-$defaultHoverColor: #108ee9; //#E0E0E0 #FAFAFA 
-$defaultHoverBGColor: #fff;
-$defaultHoverBorderColor: #108ee9;
+$defaultHoverColor: #495060; //#E0E0E0 #FAFAFA 
+$defaultHoverBGColor: mix(#FFF,$defaultBGColor, 30%);
+$defaultHoverBorderColor: #dddee1;
 
-$defaultActiveColor: #0e77ca;
-$defaultActiveBGColor: #fff;  //#d4d4d4 #EFEFEF
-$defaultActiveBorderColor: #0e77ca;
+$defaultActiveColor: #495060;
+$defaultActiveBGColor: mix(#000,$defaultBGColor, 5%);  //#d4d4d4 #EFEFEF
+$defaultActiveBorderColor: #dddee1;
 
 //dashed按钮风格
 $dashedColor: rgba(0,0,0,.7);
 
 //按钮样式风格
-$typeList: primary,danger;
+$typeList: primary,danger,warning,success,info;
+
+$primaryBGColor: #2d8cf0;
+$dangerBGColor: #ed3f14;
+$warningBGColor: #f90;
+$successBGColor: #19be6b;
+$infoBGColor: #2db7f5;
 
 $typeMap: (
 	primaryColor: #FFF,
-	primaryBGColor: #2d8cf0,
-	primaryBorderColor: #2d8cf0,
+	primaryBGColor: $primaryBGColor,
+	primaryBorderColor: $primaryBGColor,
+	//hover
 	primaryHoverColor: #FFF,
-	primaryHoverBGColor: mix(#FFF,#2d8cf0, 20%),
-	primaryHoverBorderColor: mix(#FFF,#2d8cf0, 20%),
+	primaryHoverBGColor: mix(#FFF,$primaryBGColor, 20%),
+	primaryHoverBorderColor: mix(#FFF,$primaryBGColor, 20%),
+	//active
 	primaryActiveColor: #FFF,
-	primaryActiveBGColor: mix(#000,#2d8cf0, 10%),
-	primaryActiveBorderColor: mix(#000,#2d8cf0, 10%),
+	primaryActiveBGColor: mix(#000,$primaryBGColor, 10%),
+	primaryActiveBorderColor: mix(#000,$primaryBGColor, 10%),
 	
+	//danger-button
 	dangerColor: #FFF,
-	dangerBGColor: #f04134,
-	dangerBorderColor: #f04134,
+	dangerBGColor: $dangerBGColor,
+	dangerBorderColor: $dangerBGColor,
+	//hover
 	dangerHoverColor: #FFF,
-	dangerHoverBGColor: #E8685E,
-	dangerHoverBorderColor: #E8685E,
+	dangerHoverBGColor: mix(#FFF,$dangerBGColor, 20%),
+	dangerHoverBorderColor: mix(#FFF,$dangerBGColor, 20%),
+	//active
 	dangerActiveColor: #FFF,
-	dangerActiveBGColor: #d73435,
-	dangerActiveBorderColor: #d73435,
+	dangerActiveBGColor:  mix(#000,$dangerBGColor, 10%),
+	dangerActiveBorderColor:  mix(#000,$dangerBGColor, 10%),
+
+	//warning-button
+	warningColor: #FFF,
+	warningBGColor: $warningBGColor,
+	warningBorderColor: $warningBGColor,
+	//hover
+	warningHoverColor: #FFF,
+	warningHoverBGColor: mix(#FFF,$warningBGColor, 20%),
+	warningHoverBorderColor: mix(#FFF,$warningBGColor, 20%),
+	//active
+	warningActiveColor: #FFF,
+	warningActiveBGColor:  mix(#000,$warningBGColor, 10%),
+	warningActiveBorderColor:  mix(#000,$warningBGColor, 10%),
+
+	//success-button
+	successColor: #FFF,
+	successBGColor: $successBGColor,
+	successBorderColor: $successBGColor,
+	//hover
+	successHoverColor: #FFF,
+	successHoverBGColor: mix(#FFF,$successBGColor, 20%),
+	successHoverBorderColor: mix(#FFF,$successBGColor, 20%),
+	//active
+	successActiveColor: #FFF,
+	successActiveBGColor:  mix(#000,$successBGColor, 10%),
+	successActiveBorderColor:  mix(#000,$successBGColor, 10%),
+
+	//info-button
+	infoColor: #FFF,
+	infoBGColor: $infoBGColor,
+	infoBorderColor: $infoBGColor,
+	//hover
+	infoHoverColor: #FFF,
+	infoHoverBGColor: mix(#FFF,$infoBGColor, 20%),
+	infoHoverBorderColor: mix(#FFF,$infoBGColor, 20%),
+	//active
+	infoActiveColor: #FFF,
+	infoActiveBGColor:  mix(#000,$infoBGColor, 10%),
+	infoActiveBorderColor:  mix(#000,$infoBGColor, 10%),
 );
 
 //disabled样式
@@ -53,32 +103,28 @@ $disabledCursor:not-allowed;
 .nil-btn {
     display: inline-block;
     cursor: pointer;
-	box-sizing: border-box;
+	//box-sizing: border-box;
     white-space: nowrap;
     text-decoration: none;
     overflow: hidden;
     position: relative;
 	margin-bottom:0;
 	height:$height;
-	padding: 0 10px;
-	-ms-touch-action:manipulation;
+	padding: 0 15px;
 	touch-action:manipulation;
 	border:1px solid $defaultBorderColor;
-	line-height:normal;
+	line-height: normal;
 	font-weight:500;
 	font-size:12px;
 	background: $defaultBGColor;
 	color: $defaultColor;
 	position: relative;
-	-webkit-user-select:none;
-	-moz-user-select:none;
-	-ms-user-select:none;
 	user-select:none;
 	vertical-align: middle;
 	border-radius: $borderRadius;
 	transition: all .3s;
 }
-//??
+
 .nil-btn-radius {
 	border-radius: $borderRadius;
 }
@@ -102,11 +148,13 @@ $disabledCursor:not-allowed;
 	outline:0
 }
 
-.nil-btn-sm {
+.nil-btn-small {
 	height:$smallHeight;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
-.nil-btn-lg {
+.nil-btn-large {
 	height:$largeHeight;
 }
 

@@ -11,6 +11,10 @@ ReactDOM.render(
         <Button size="small">测试</Button>
         <Button>测试</Button>
         <Button type="primary">测试</Button>
+        <Button type="danger">测试danger</Button>
+        <Button type="warning">测试warning</Button>
+        <Button type="success">测试success</Button>
+        <Button type="info">测试info</Button>
         <Button size="large">测试</Button>
     </div>
     , demo);
