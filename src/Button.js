@@ -74,8 +74,7 @@ export default class Button extends Component {
 					[`${prefixCls}-${type}`]: type,
 					[`${prefixCls}-block`]: !inline,
 					[`${prefixCls}-inline`]: inline,
-					[`${prefixCls}-sm`]: size === 'small',
-					[`${prefixCls}-lg`]: size === 'large',
+					[`${prefixCls}-${size}`]: size,
 					[`${prefixCls}-disabled`]: disabled,
 					[className]: true
 				})}>

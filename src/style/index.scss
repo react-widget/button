@@ -1,3 +1,62 @@
+@function tint($color, $weight: 20%) {
+	@return mix(#FFF,$color, $weight);
+}
+@function shade($color, $weight: 10%) {
+	@return mix(#000,$color, $weight);
+}
+
+@mixin button-type($type,$bgColor,$color) {
+	.nil-btn-#{$type} {
+		color:$color;
+		background-color: $bgColor;
+		border-color:$bgColor;
+	}
+	
+	.nil-btn-#{$type}:focus,
+	.nil-btn-#{$type}:hover {
+		color: $color;
+		background-color: tint( $bgColor, 20% );
+		border-color:tint( $bgColor, 20% );
+	}
+	
+	.nil-btn-#{$type}:active {
+		color: $color;
+		background-color: shade( $bgColor, 10% );
+		border-color:shade( $bgColor, 10% );
+	}
+}
+
+@mixin button-ghost() {
+	.nil-btn-ghost {
+		background-color: transparent;
+	}
+	
+	.nil-btn-ghost:focus,
+	.nil-btn-ghost:hover {
+		background-color: transparent;
+	}
+	
+	.nil-btn-ghost:active {
+		background-color: transparent;
+	}
+}
+
+@mixin button-dashed($bgColor) {
+	.nil-btn-dashed {
+		border-style:dashed;
+		background-color: transparent;
+	}
+
+	.nil-btn-dashed:focus,
+	.nil-btn-dashed:hover {
+		background-color: tint( $bgColor, 50% );
+	}
+	
+	.nil-btn-dashed:active {
+		background-color: shade( $bgColor, 1% );
+	}
+}
+
 $height: 28px !default;
 $smallHeight: 22px !default;
 $largeHeight: 32px !default;
@@ -17,87 +76,20 @@ $defaultActiveBGColor: mix(#000,$defaultBGColor, 5%);  //#d4d4d4 #EFEFEF
 $defaultActiveBorderColor: #dddee1;
 
 //dashed按钮风格
-$dashedColor: rgba(0,0,0,.7);
+$dashedColor: $defaultBorderColor;
 
 //按钮样式风格
-$typeList: primary,danger,warning,success,info;
-
 $primaryBGColor: #2d8cf0;
 $dangerBGColor: #ed3f14;
 $warningBGColor: #f90;
 $successBGColor: #19be6b;
 $infoBGColor: #2db7f5;
 
-$typeMap: (
-	primaryColor: #FFF,
-	primaryBGColor: $primaryBGColor,
-	primaryBorderColor: $primaryBGColor,
-	//hover
-	primaryHoverColor: #FFF,
-	primaryHoverBGColor: mix(#FFF,$primaryBGColor, 20%),
-	primaryHoverBorderColor: mix(#FFF,$primaryBGColor, 20%),
-	//active
-	primaryActiveColor: #FFF,
-	primaryActiveBGColor: mix(#000,$primaryBGColor, 10%),
-	primaryActiveBorderColor: mix(#000,$primaryBGColor, 10%),
-	
-	//danger-button
-	dangerColor: #FFF,
-	dangerBGColor: $dangerBGColor,
-	dangerBorderColor: $dangerBGColor,
-	//hover
-	dangerHoverColor: #FFF,
-	dangerHoverBGColor: mix(#FFF,$dangerBGColor, 20%),
-	dangerHoverBorderColor: mix(#FFF,$dangerBGColor, 20%),
-	//active
-	dangerActiveColor: #FFF,
-	dangerActiveBGColor:  mix(#000,$dangerBGColor, 10%),
-	dangerActiveBorderColor:  mix(#000,$dangerBGColor, 10%),
-
-	//warning-button
-	warningColor: #FFF,
-	warningBGColor: $warningBGColor,
-	warningBorderColor: $warningBGColor,
-	//hover
-	warningHoverColor: #FFF,
-	warningHoverBGColor: mix(#FFF,$warningBGColor, 20%),
-	warningHoverBorderColor: mix(#FFF,$warningBGColor, 20%),
-	//active
-	warningActiveColor: #FFF,
-	warningActiveBGColor:  mix(#000,$warningBGColor, 10%),
-	warningActiveBorderColor:  mix(#000,$warningBGColor, 10%),
-
-	//success-button
-	successColor: #FFF,
-	successBGColor: $successBGColor,
-	successBorderColor: $successBGColor,
-	//hover
-	successHoverColor: #FFF,
-	successHoverBGColor: mix(#FFF,$successBGColor, 20%),
-	successHoverBorderColor: mix(#FFF,$successBGColor, 20%),
-	//active
-	successActiveColor: #FFF,
-	successActiveBGColor:  mix(#000,$successBGColor, 10%),
-	successActiveBorderColor:  mix(#000,$successBGColor, 10%),
-
-	//info-button
-	infoColor: #FFF,
-	infoBGColor: $infoBGColor,
-	infoBorderColor: $infoBGColor,
-	//hover
-	infoHoverColor: #FFF,
-	infoHoverBGColor: mix(#FFF,$infoBGColor, 20%),
-	infoHoverBorderColor: mix(#FFF,$infoBGColor, 20%),
-	//active
-	infoActiveColor: #FFF,
-	infoActiveBGColor:  mix(#000,$infoBGColor, 10%),
-	infoActiveBorderColor:  mix(#000,$infoBGColor, 10%),
-);
 
 //disabled样式
-$disabledColor: rgba(0,0,0,.25);
+$disabledColor: #bbbec4;
 $disabledBGColor:#f7f7f7;
-$disabledBorderColor:#d9d9d9;
+$disabledBorderColor:#dddee1;
 $disabledCursor:not-allowed;
 
 .nil-btn {
@@ -123,100 +115,81 @@ $disabledCursor:not-allowed;
 	vertical-align: middle;
 	border-radius: $borderRadius;
 	transition: all .3s;
-}
 
-.nil-btn-radius {
-	border-radius: $borderRadius;
-}
+	@at-root {
+		.nil-btn,
+		.nil-btn:active,
+		.nil-btn:focus {
+			outline:0
+		}
 
-.nil-btn-block {
-	display:block;
-	width:100%;	
-}
+		.nil-btn-radius {
+			border-radius: $borderRadius;
+		}
 
-.nil-btn-block+.nil-btn-block {
-    margin-top: 5px;
-}
+		.nil-btn-block {
+			display:block;
+			width:100%;	
+		}
+		
+		.nil-btn-block+.nil-btn-block {
+			margin-top: 5px;
+		}
+		
+		.nil-btn:not(.nil-btn-block)+.nil-btn:not(.nil-btn-block) {
+			margin-left: 5px;
+		}		
 
-.nil-btn-inline+.nil-btn-inline {
-    margin-left: 5px;
-}
+		.nil-btn:focus,
+		.nil-btn:hover {
+			color:$defaultHoverColor;
+			background-color:$defaultHoverBGColor;
+			border-color:$defaultHoverBorderColor;
+		}
 
-.nil-btn,
-.nil-btn:active,
-.nil-btn:focus {
-	outline:0
-}
+		.nil-btn:active{
+			color:$defaultActiveColor;
+			background-color:$defaultActiveBGColor;
+			border-color:$defaultActiveBorderColor;
+		}
 
-.nil-btn-small {
-	height:$smallHeight;
-	padding-left: 5px;
-	padding-right: 5px;
-}
+		.nil-btn-disabled > *,
+		.nil-btn[disabled] > * {
+			pointer-events:none
+		}
 
-.nil-btn-large {
-	height:$largeHeight;
-}
+		.nil-btn-small {
+			height:$smallHeight;
+			padding-left: 5px;
+			padding-right: 5px;
+		}
 
-.nil-btn:focus,
-.nil-btn:hover {
-	color:$defaultHoverColor;
-	background-color:$defaultHoverBGColor;
-	border-color:$defaultHoverBorderColor;
-}
+		.nil-btn-large {
+			height:$largeHeight;
+		}
 
-.nil-btn:active,
-.nil-btn-active{
-	color:$defaultActiveColor;
-	background-color:$defaultActiveBGColor;
-	border-color:$defaultActiveBorderColor;
-}
+		@include button-type(danger, $dangerBGColor, #FFF);
+		@include button-type(success, $successBGColor, #FFF);
+		@include button-type(warning, $warningBGColor, #FFF);
+		@include button-type(info, $infoBGColor, #FFF);
+		@include button-dashed($defaultBGColor);
+		@include button-ghost();
+		
+		//disabled样式
+		.nil-btn.nil-btn-disabled,
+		.nil-btn[disabled],
+		.nil-btn:disabled,
+		.nil-btn-disabled:active,
+		.nil-btn-disabled:hover,
+		.nil-btn[disabled]:active,
+		.nil-btn[disabled]:hover {
+			color:$disabledColor;
+			background-color:$disabledBGColor;
+			border-color:$disabledBorderColor;
+			cursor:$disabledCursor;
+		}
 
-.nil-btn-disabled>*,
-.nil-btn[disabled]>* {
-	pointer-events:none
-}
-
-.nil-btn-dashed {
-	border-style:dashed;
-	color: $dashedColor;
-}
-
-@each $type in $typeList {
-	.nil-btn-#{$type} {
-		color:map-get($typeMap, "#{$type}Color");
-		background-color:map-get($typeMap, "#{$type}BGColor");
-		border-color:map-get($typeMap, "#{$type}BorderColor");
 	}
-	
-	.nil-btn-#{$type}:focus,.nil-btn-#{$type}:hover {
-		color:map-get($typeMap, "#{$type}HoverColor");
-		background-color:map-get($typeMap, "#{$type}HoverBGColor");
-		border-color:map-get($typeMap, "#{$type}HoverBorderColor");
-	}
-	
-	.nil-btn-#{$type}.nil-btn-active,.nil-btn-#{$type}:active {
-		color:map-get($typeMap, "#{$type}ActiveColor");
-		background-color:map-get($typeMap, "#{$type}ActiveBGColor");
-		border-color:map-get($typeMap, "#{$type}ActiveBorderColor");
-	}
-}
-/*
-.nil-btn-primary.nil-btn-disabled,
-.nil-btn-danger.nil-btn-disabled,
-.nil-btn-dashed.nil-btn-disabled,
-*/
-.nil-btn.nil-btn-disabled,
-.nil-btn[disabled],
-.nil-btn:disabled,
-.nil-btn-disabled:active,
-.nil-btn-disabled:hover,
-.nil-btn[disabled]:active,
-.nil-btn[disabled]:hover {
-    color:$disabledColor;
-	background-color:$disabledBGColor;
-	border-color:$disabledBorderColor;
-	cursor:$disabledCursor;
 }
 
 .nil-btn-icon-only {
@@ -281,22 +254,22 @@ $disabledCursor:not-allowed;
 	border-bottom-left-radius:0;
 	border-top-left-radius:0;
 }
-.nil-btn-group .nil-btn-primary:not(:first-child):not(:last-child) {
-	border-right-color:map-get($typeMap, "primaryHoverBGColor");
-	border-left-color:map-get($typeMap, "primaryActiveBGColor");
-}
-.nil-btn-group .nil-btn-primary:not(:first-child):not(:last-child):disabled {
-	border-color:$disabledBorderColor
-}
-.nil-btn-group .nil-btn-primary:first-child:not(:last-child) {
-	border-right-color:map-get($typeMap, "primaryActiveBGColor");
-}
-.nil-btn-group .nil-btn-primary:first-child:not(:last-child)[disabled] {
-	border-right-color:$disabledBorderColor
-}
-.nil-btn-group .nil-btn-primary+.nil-btn-primary,.nil-btn-group .nil-btn-primary:last-child:not(:first-child) {
-	border-left-color:map-get($typeMap, "primaryActiveBGColor");
-}
+// .nil-btn-group .nil-btn-primary:not(:first-child):not(:last-child) {
+// 	border-right-color:map-get($typeMap, "primaryHoverBGColor");
+// 	border-left-color:map-get($typeMap, "primaryActiveBGColor");
+// }
+// .nil-btn-group .nil-btn-primary:not(:first-child):not(:last-child):disabled {
+// 	border-color:$disabledBorderColor
+// }
+// .nil-btn-group .nil-btn-primary:first-child:not(:last-child) {
+// 	border-right-color:map-get($typeMap, "primaryActiveBGColor");
+// }
+// .nil-btn-group .nil-btn-primary:first-child:not(:last-child)[disabled] {
+// 	border-right-color:$disabledBorderColor
+// }
+// .nil-btn-group .nil-btn-primary+.nil-btn-primary,.nil-btn-group .nil-btn-primary:last-child:not(:first-child) {
+// 	border-left-color:map-get($typeMap, "primaryActiveBGColor");
+// }
 .nil-btn-group .nil-btn-primary+.nil-btn-primary[disabled],.nil-btn-group .nil-btn-primary:last-child:not(:first-child)[disabled] {
 	border-left-color:$disabledBorderColor
 }
