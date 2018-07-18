@@ -90,7 +90,7 @@ $infoBGColor: #2db7f5;
 $disabledColor: #bbbec4;
 $disabledBGColor:#f7f7f7;
 $disabledBorderColor:#dddee1;
-$disabledCursor:not-allowed;
+$disabledCursor: default;
 
 .nil-btn {
     display: inline-block;
@@ -98,14 +98,14 @@ $disabledCursor:not-allowed;
 	//box-sizing: border-box;
     white-space: nowrap;
     text-decoration: none;
-    overflow: hidden;
+   // overflow: hidden;
     position: relative;
 	margin-bottom:0;
 	height:$height;
 	padding: 0 15px;
 	touch-action:manipulation;
 	border:1px solid $defaultBorderColor;
-	line-height: normal;
+	line-height: $height - 2;
 	font-weight:500;
 	font-size:12px;
 	background: $defaultBGColor;
@@ -116,6 +116,31 @@ $disabledCursor:not-allowed;
 	border-radius: $borderRadius;
 	transition: all .3s;
 
+	&:before {
+		position: absolute;
+		top: -1px;
+		left: -1px;
+		bottom: -1px;
+		right: -1px;
+		background: #fff;
+		opacity: .35;
+		content: "";
+		border-radius: inherit;
+		z-index: 1;
+		transition: opacity .2s;
+		pointer-events: none;
+		display: none;
+	}
+
+	&.nil-btn-loading {
+		pointer-events: none;
+		position: relative;
+	}
+
+	&.nil-btn-loading:before {
+		display: block;
+	}
+
 	@at-root {
 		.nil-btn,
 		.nil-btn:active,
@@ -125,6 +150,10 @@ $disabledCursor:not-allowed;
 
 		.nil-btn-radius {
 			border-radius: $borderRadius;
+		}
+
+		.nil-btn-circle {
+			border-radius: 50%;
 		}
 
 		.nil-btn-block {
@@ -160,14 +189,17 @@ $disabledCursor:not-allowed;
 
 		.nil-btn-small {
 			height:$smallHeight;
+			line-height:$smallHeight - 2;
 			padding-left: 5px;
 			padding-right: 5px;
 		}
 
 		.nil-btn-large {
 			height:$largeHeight;
+			line-height:$largeHeight - 2;
 		}
-
+		
+		@include button-type(primary, $primaryBGColor, #FFF);
 		@include button-type(danger, $dangerBGColor, #FFF);
 		@include button-type(success, $successBGColor, #FFF);
 		@include button-type(warning, $warningBGColor, #FFF);
@@ -189,92 +221,122 @@ $disabledCursor:not-allowed;
 			cursor:$disabledCursor;
 		}
 
-	}
+		.nil-btn-icon-only {
+			padding-left:8px;
+			padding-right:8px
+		}
 
+	}
+	.nil-btn-text {
+		display: inline-block;
+		//vertical-align: middle;
+		// overflow: hidden;
+		// text-overflow: ellipsis;
+		// max-width: 100%;
+	}
 	> .nil-icon+.nil-btn-text, 
 	> .nil-btn-text+.nil-icon{
 		margin-left: 6px;
 	}
+
+	&-group {
+		position:relative;
+		display:inline-block;
+
+		> .nil-btn {
+			position: relative;
+			display:inline-block;
+			line-height: $height - 2;
+		
+			&:hover,
+			&:focus,
+			&:active {
+			  z-index: 2;
+			}
+		
+			&:disabled {
+			  z-index: 0;
+			}	
+		}
+
+		.nil-btn:not(.nil-btn-block)+.nil-btn:not(.nil-btn-block) {
+			margin-left:-1px
+		}
+
+		>.nil-btn:first-child {
+			margin-left:0
+		}
+
+		.nil-btn:not(:first-child):not(:last-child) {
+			border-radius:0;
+		}
+
+		>.nil-btn:first-child:not(:last-child) {
+			border-bottom-right-radius:0;
+			border-top-right-radius:0;
+		}
+
+		>.nil-btn:last-child:not(:first-child) {
+			border-bottom-left-radius:0;
+			border-top-left-radius:0;
+		}
+
+		.nil-btn-primary+.nil-btn-primary[disabled],
+		.nil-btn-primary:last-child:not(:first-child)[disabled] {
+			border-left-color:$disabledBorderColor
+		}
+	}
 }
 
-.nil-btn-icon-only {
-	padding-left:8px;
-	padding-right:8px
-}
-
-.nil-btn-icon {
-    vertical-align: baseline;
-    background-position: center center;
-    background-repeat: no-repeat;
-	display: inline-block;
-    font-style: normal;
-    text-align: center;
-    text-transform: none;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.nil-btn>.nil-btn-icon+.nil-btn-text, .nil-btn>.nil-btn-text+.nil-btn-icon {
-    margin-left: 3px;
-}
-
-.nil-btn-text {
-    display: inline-block;
-    vertical-align: top;
-    overflow: hidden;
-    text-overflow: ellipsis;
-	max-width: 100%;
-}
-
-.nil-btn-group {
-	position:relative;
-	display:inline-block
-}
-.nil-btn-group>.nil-btn {
-	position:relative;
-	z-index:1
-}
-.nil-btn-group>.nil-btn.active,.nil-btn-group>.nil-btn:active,.nil-btn-group>.nil-btn:focus,.nil-btn-group>.nil-btn:hover {
-	z-index:2
-}
-.nil-btn-group>.nil-btn:disabled {
-	z-index:0
-}
-
-.nil-btn-group .nil-btn+.nil-btn {
-	margin-left:-1px
-}
-.nil-btn-group .nil-btn:not(:first-child):not(:last-child) {
-	border-radius:0;
-}
-.nil-btn-group>.nil-btn:first-child {
-	margin-left:0
-}
-.nil-btn-group>.nil-btn:first-child:not(:last-child) {
-	border-bottom-right-radius:0;
-	border-top-right-radius:0;
-}
-.nil-btn-group>.nil-btn:last-child:not(:first-child) {
-	border-bottom-left-radius:0;
-	border-top-left-radius:0;
-}
-// .nil-btn-group .nil-btn-primary:not(:first-child):not(:last-child) {
-// 	border-right-color:map-get($typeMap, "primaryHoverBGColor");
-// 	border-left-color:map-get($typeMap, "primaryActiveBGColor");
+// .nil-btn-group {
+// 	position:relative;
+// 	display:inline-block;
 // }
-// .nil-btn-group .nil-btn-primary:not(:first-child):not(:last-child):disabled {
-// 	border-color:$disabledBorderColor
+// .nil-btn-group>.nil-btn {
+// 	position:relative;
+// 	z-index:1
 // }
-// .nil-btn-group .nil-btn-primary:first-child:not(:last-child) {
-// 	border-right-color:map-get($typeMap, "primaryActiveBGColor");
+// .nil-btn-group>.nil-btn.active,.nil-btn-group>.nil-btn:active,.nil-btn-group>.nil-btn:focus,.nil-btn-group>.nil-btn:hover {
+// 	z-index:2
 // }
-// .nil-btn-group .nil-btn-primary:first-child:not(:last-child)[disabled] {
-// 	border-right-color:$disabledBorderColor
+// .nil-btn-group>.nil-btn:disabled {
+// 	z-index:0
 // }
-// .nil-btn-group .nil-btn-primary+.nil-btn-primary,.nil-btn-group .nil-btn-primary:last-child:not(:first-child) {
-// 	border-left-color:map-get($typeMap, "primaryActiveBGColor");
+
+// .nil-btn-group .nil-btn+.nil-btn {
+// 	margin-left:-1px
 // }
-.nil-btn-group .nil-btn-primary+.nil-btn-primary[disabled],.nil-btn-group .nil-btn-primary:last-child:not(:first-child)[disabled] {
-	border-left-color:$disabledBorderColor
-}
+// .nil-btn-group .nil-btn:not(:first-child):not(:last-child) {
+// 	border-radius:0;
+// }
+// .nil-btn-group>.nil-btn:first-child {
+// 	margin-left:0
+// }
+// .nil-btn-group>.nil-btn:first-child:not(:last-child) {
+// 	border-bottom-right-radius:0;
+// 	border-top-right-radius:0;
+// }
+// .nil-btn-group>.nil-btn:last-child:not(:first-child) {
+// 	border-bottom-left-radius:0;
+// 	border-top-left-radius:0;
+// }
+// // .nil-btn-group .nil-btn-primary:not(:first-child):not(:last-child) {
+// // 	border-right-color:map-get($typeMap, "primaryHoverBGColor");
+// // 	border-left-color:map-get($typeMap, "primaryActiveBGColor");
+// // }
+// // .nil-btn-group .nil-btn-primary:not(:first-child):not(:last-child):disabled {
+// // 	border-color:$disabledBorderColor
+// // }
+// // .nil-btn-group .nil-btn-primary:first-child:not(:last-child) {
+// // 	border-right-color:map-get($typeMap, "primaryActiveBGColor");
+// // }
+// // .nil-btn-group .nil-btn-primary:first-child:not(:last-child)[disabled] {
+// // 	border-right-color:$disabledBorderColor
+// // }
+// // .nil-btn-group .nil-btn-primary+.nil-btn-primary,.nil-btn-group .nil-btn-primary:last-child:not(:first-child) {
+// // 	border-left-color:map-get($typeMap, "primaryActiveBGColor");
+// // }
+// .nil-btn-group .nil-btn-primary+.nil-btn-primary[disabled],
+// .nil-btn-group .nil-btn-primary:last-child:not(:first-child)[disabled] {
+// 	border-left-color:$disabledBorderColor
+// }

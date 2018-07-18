@@ -17,7 +17,7 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "classnames": "^2.2.6",
-    "nil-icon": "0.0.1",
+    "nil-icon": "0.0.2",
     "normalize.css": "^8.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.1",

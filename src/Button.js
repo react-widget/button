@@ -13,8 +13,8 @@ export default class Button extends Component {
 		htmlType: PropTypes.oneOf(['button', 'submit', 'reset']),
 		className: PropTypes.string,
 		block: PropTypes.bool,
-		ghost: PropTypes.bool,// 后续实现
-		circle: PropTypes.bool,// 后续实现
+		//ghost: PropTypes.bool,// 后续实现
+		circle: PropTypes.bool,
 		disabled: PropTypes.bool,
 		loading: PropTypes.bool,
 		icon: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
@@ -27,7 +27,6 @@ export default class Button extends Component {
 		size: '',
 		htmlType: 'button',
 		className: '',
-		iconCls: '',
 		disabled: false,
 		prefixCls: 'nil-btn'
 	};
@@ -73,10 +72,15 @@ export default class Button extends Component {
 
 		const Node = component || (href || target ? 'a' : 'button');
 
+		if (Node === 'button') {
+			nodeProps['type'] = htmlType;
+		}
+
 		return (
 			<Node
 				{...nodeProps}
-				type={htmlType}
+				href={href}
+				target={target}
 				onClick={(e) => this.handleClick(e)}
 				className={classNames({
 					[`${prefixCls}`]: true,
@@ -84,6 +88,7 @@ export default class Button extends Component {
 					[`${prefixCls}-block`]: block,
 					[`${prefixCls}-${size}`]: size,
 					[`${prefixCls}-circle`]: circle,
+					[`${prefixCls}-loading`]: loading,
 					[`${prefixCls}-icon-only`]: !children && icon,
 					[`${prefixCls}-disabled`]: disabled,
 					[className]: true
