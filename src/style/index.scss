@@ -190,6 +190,11 @@ $disabledCursor:not-allowed;
 		}
 
 	}
+
+	> .nil-icon+.nil-btn-text, 
+	> .nil-btn-text+.nil-icon{
+		margin-left: 6px;
+	}
 }
 
 .nil-btn-icon-only {
