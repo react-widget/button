@@ -1,59 +1,3 @@
-# Button
-
-Button组件
-
-## 安装
-
-```
-npm install --save react-widget-button
-```
-
-
-## 使用
-
-[![Edit react-widget-button](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/react-widget-button-dv1xf?fontsize=14&hidenavigation=1&theme=dark)
-
-```js
-import {Button} from 'react-widget-button';
-import 'react-widget-button/style';
-
-<Button>按钮</Button>
-
-```
-
-
-
-### Interfaces
-
-```ts
-interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "type" | "prefix"> {
-    prefixCls: string;
-    className?: string;
-    htmlType?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
-    type?: "primary";
-    size?: "small" | "default" | "large";
-    disabled?: boolean;
-    loading?: boolean;
-    active?: boolean;
-    prefix?: React.ReactNode;
-    suffix?: React.ReactNode;
-    tagName: React.ElementType;
-}
-
-export interface ButtonGroupProps {
-    prefixCls: string;
-    className?: string;
-    disabled?: boolean;
-    type?: "primary";
-    size?: "small" | "default" | "large";
-}
-
-```
-
-
-### 基础样式
-
-```css
 .rw-btn {
     user-select: none;
     display: inline-flex;
@@ -174,6 +118,3 @@ export interface ButtonGroupProps {
 .rw-btn-group .rw-btn-disabled {
     z-index: 0;
 }
-
-
-```
