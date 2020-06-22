@@ -3,7 +3,7 @@ import classNames from "classnames";
 import ButtonGroupContext from "./ButtonGroupContext";
 
 export interface ButtonGroupProps {
-	prefixCls: string;
+	prefixCls?: string;
 	className?: string;
 	disabled?: boolean;
 	type?: "primary";
@@ -19,11 +19,11 @@ export const ButtonGroup: React.FC<ButtonGroupProps> = function ({
 	children,
 	...restProps
 }) {
-	const classes = classNames(`${prefixCls}-group`, className);
+	const cls = classNames(`${prefixCls}-group`, className);
 
 	return (
 		<ButtonGroupContext.Provider value={{ type, size, disabled }}>
-			<div {...restProps} className={classes}>
+			<div {...restProps} className={cls}>
 				{children}
 			</div>
 		</ButtonGroupContext.Provider>

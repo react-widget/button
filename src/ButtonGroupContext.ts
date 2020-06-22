@@ -6,4 +6,4 @@ export interface ButtonGroupContext {
 	size?: "small" | "default" | "large";
 }
 
-export default React.createContext<ButtonGroupContext>({});
+export default React.createContext<ButtonGroupContext | null>(null);

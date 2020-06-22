@@ -44,27 +44,26 @@ export const Button: React.FC<ButtonProps> & { Group: typeof ButtonGroup } = fun
 	tagName,
 	...restProps
 }) {
-	const btnGroup = React.useContext(ButtonGroupContext);
-	const isDisabled = btnGroup.disabled || disabled;
+	const context = React.useContext(ButtonGroupContext);
+	if (context) {
+		disabled = disabled || context.disabled;
+		size = size || context.size;
+		type = type || context.type;
+	}
 
-	const classes = classnames({
+	const cls = classnames({
 		[prefixCls!]: true,
-		[`${prefixCls}-${btnGroup.size || size}`]: btnGroup.size || size,
-		[`${prefixCls}-disabled`]: isDisabled || loading,
+		[`${prefixCls}-${size}`]: size,
+		[`${prefixCls}-disabled`]: disabled || loading,
 		[`${prefixCls}-active`]: active,
 		[`${prefixCls}-loading`]: loading,
-		[`${prefixCls}-${btnGroup.type || type}`]: btnGroup.type || type,
+		[`${prefixCls}-${type}`]: type,
 	});
 
 	const TagName = tagName!;
 
 	return (
-		<TagName
-			{...restProps}
-			disabled={isDisabled || loading}
-			className={classes}
-			type={htmlType}
-		>
+		<TagName {...restProps} disabled={disabled || loading} className={cls} type={htmlType}>
 			{prefix}
 			{(prefix || suffix) && isReactNodeEmpty(children) ? (
 				<span className={`${prefixCls}-text`}>{children}</span>
